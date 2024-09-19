@@ -1,0 +1,86 @@
+#!/bin/bash -x
+# $1 - name
+# $2 - ignored
+# $3 - basis
+
+
+VARSDIR=/data/melkumov/SAPT2020.1/bin
+
+#read the directories from vars.cfg
+. $VARSDIR/vars.cfg
+
+SAPTDIR=$MAIN_SAPT_DIR
+
+
+DALTONDIR=`echo "$DALTEXE" |sed 's#bin/dalton$##g'`
+DALTONBAS=$DALTONDIR/basis
+CONSTRUCTMOL=$SAPTDIR/../misc/daltutil/constructtrim.awk
+
+name=$1
+type=$2
+
+       farbond=1
+       midbond=0
+       dim=1
+
+basis=$3
+
+if [ ! -e $DALTONBAS/$basis ]; then
+  echo "Basis file $basis not exist in  $DALTONBAS"
+  exit
+fi
+
+if ([ $midbond = 1 ] && [ ! -e Mb.bas ]); then
+  echo "$type selected but no Mb.bas file present"
+  exit
+fi
+
+if [ ! -e trimer.cnf ]; then
+  echo "File dimer.cnf not present"
+  exit
+fi
+
+#atomsA=`awk '{if (NR==1) print $1}' trimer.cnf`
+#echo $atomsA
+#atomsB=`awk '{if (start && NF==1) {print $1; start=0}; if (NF==1) start=1}' trimer.cnf`
+#echo $atomsB
+#atomsC=`awk '{if (start==2 && NF==1) {print $1; start=0}; if (NF==1) start++}' trimer.cnf`
+#echo $atomsC
+
+atomsA=6
+atomsB=6
+atomsC=6
+
+  atoma=$[atomsA+atomsB+atomsC]
+  atomb=$[atomsA+atomsB+atomsC]
+  atomc=$[atomsA+atomsB+atomsC]  
+
+
+  atomsA=$atoma 
+  atomsB=$atomb 
+  atomsC=$atomb  
+
+
+
+  # construct A
+  file=$name"A"
+  awk -f $CONSTRUCTMOL -v atomnum=$atoma -v basis=$DALTONBAS/$basis -v mona=1 -v monb=0 -v monc=0 trimer.cnf >$file.mol
+  # construct B
+  file=$name"B"
+  awk -f $CONSTRUCTMOL -v atomnum=$atoma -v basis=$DALTONBAS/$basis -v mona=0 -v monb=1 -v monc=0 trimer.cnf >$file.mol
+   # construct C
+  file=$name"C"
+  awk -f $CONSTRUCTMOL -v atomnum=$atoma -v basis=$DALTONBAS/$basis -v mona=0 -v monb=0 -v monc=1 trimer.cnf >$file.mol
+  # construct AB
+  file=$name"AB"
+  awk -f $CONSTRUCTMOL -v atomnum=$atoma -v basis=$DALTONBAS/$basis -v mona=1 -v monb=1 -v monc=0 trimer.cnf >$file.mol
+  # construct BC
+  file=$name"BC"
+  awk -f $CONSTRUCTMOL -v atomnum=$atoma -v basis=$DALTONBAS/$basis -v mona=0 -v monb=1 -v monc=1 trimer.cnf >$file.mol
+  # construct AC
+  file=$name"AC"
+  awk -f $CONSTRUCTMOL -v atomnum=$atoma -v basis=$DALTONBAS/$basis -v mona=1 -v monb=0 -v monc=1 trimer.cnf >$file.mol
+  # construct ABC
+  file=$name"ABC"
+  awk -f $CONSTRUCTMOL -v atomnum=$atoma -v basis=$DALTONBAS/$basis -v mona=1 -v monb=1 -v monc=1 trimer.cnf >$file.mol
+ 

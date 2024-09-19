@@ -1,0 +1,14 @@
+Methanol Trimer
+ &TRN                                                                          
+  ISITALCH=F ,ISITG90=F, ISITG88=F, ISITHNDO=F, ISITMICR=F, ISITATM=F,
+  ISITANEW=F, ISITDALT=T,OUT=F, TOLER=15, DIMER=T,MEMTRAN=150000000
+ &END                                                                          
+
+ &INPUTCOR
+  SAPTKS=T, E3IND=T, E30XI=T,
+  PRINT=F, TIMEREP=T, MEMSAPT="1500000000"
+ &END
+
+ &SAPTDFT
+  CKSDISP=T, CKSIND=T
+ &END

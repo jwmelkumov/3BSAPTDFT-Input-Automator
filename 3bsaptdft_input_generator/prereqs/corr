@@ -1,0 +1,9 @@
+trimer run.
+
+ &corr
+
+  E1X=T, E2I=T, E2XI=T, E2XD=T, E3D=T, E3I=T, E3ID=F, E31=F,
+  E1XCORR=F,
+  E4S=F, E4D=F, E4T=F, E4Q=F
+
+ &END
