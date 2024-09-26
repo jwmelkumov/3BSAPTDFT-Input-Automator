@@ -13,7 +13,7 @@
 # Author: John W. Melkumov
 #================================================
 
-MAIN_SAPT_DIR=/data/melkumov/SAPT2020.1
+MAIN_SAPT_DIR=/PATH/TO/SAPT2020.1
 
 if [ $# -eq 0 ]; then
     echo "No NAME argument provided."
