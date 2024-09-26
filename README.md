@@ -8,7 +8,7 @@
 $MAIN_SAPT_DIR/misc/daltutil/createtrimers
 
 Modify script to correctly parse from trimer.cnf
-the atomsA, atomsB, and atomsC quantities,
+the atomsA, atomsB, and atomsC quantities
 or explicitly define them before running
 gen_3saptdft_files.sh (they are the number
 of atoms in monomer A, B, and C, respectively).
