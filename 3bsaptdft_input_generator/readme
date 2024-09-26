@@ -1,18 +1,18 @@
 -------------------------------------------------
 Prepare:
 -------------------------------------------------
-- ${NAME}P.data file
-- ${NAME}A.dal file
-- corr file
-- trimer.info file
+- ${NAME}P.data 
+- ${NAME}A.dal 
+- corr 
+- trimer.info 
 
 -------------------------------------------------
 Modify:
 -------------------------------------------------
 $MAIN_SAPT_DIR/misc/daltutil/createtrimers
 
-to either correctly parse from trimer.cnf
-the atomsA, atomsB, and atomsC quantities,
+to correctly parse from trimer.cnf
+the atomsA, atomsB, and atomsC quantities
 or explicitly define them before running
 gen_3saptdft_files.sh (they are the number
 of atoms in monomer A, B, and C, respectively).
