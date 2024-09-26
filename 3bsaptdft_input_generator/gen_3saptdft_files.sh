@@ -3,13 +3,13 @@
 #================================================
 # Utility script to generate all necessary files
 # for running 3SAPTDFT. User need only prepare
-# *.dal files, corr file, ${NAME}P.data file, 
-# and trimer.info file with the following 
+# ${NAME}A.dal, corr, ${NAME}P.data, and 
+# trimer.info file with the following 
 # scripts/programs present in the working 
 # directory:
 #
 # (1) gen_trimer_cnf, (2) gen_dimer_cnf, 
-# (3) add_coords_to_mol.sh
+# (3) gen_tempcoords, (4) add_coords_to_mol.sh
 #
 # Author: John W. Melkumov
 #================================================
