@@ -1,7 +1,4 @@
 program gen_tempcoords
-! Program used to generate input to 3SAPTDFT
-! user must prepare trimer.info file with
-! and program will generate tempcoords file
 ! - John Melkumov 2/21/2024
     implicit none
     character(len=100) :: monomer_label(3) = ['MONOMER_A', 'MONOMER_B', &
@@ -47,10 +44,8 @@ program gen_tempcoords
         else if (monomer_label(3) == 'MONOMER_C') then
             read(10, *) num_atoms(i)
         end if
-        !write(*,*) 'on to the reading and writing portion ...'
         write(*,*) ' numatoms i = ', num_atoms(i)
         ! Read atomic coordinates, nuclear charges, and masses
-        !write(40, *) num_atoms(i)
         do j = 1, num_atoms(i)
             read(10, *) atom_name(i,j), x(i,j), y(i,j), z(i,j), nuc_charge(i,j), atm_mass(i,j)
             write(*,*) 'atomnameij = ', atom_name(i,j)

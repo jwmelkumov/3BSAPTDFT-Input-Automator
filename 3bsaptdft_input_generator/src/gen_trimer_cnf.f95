@@ -47,8 +47,7 @@ program gen_trimer_cnf
         else if (monomer_label(3) == 'MONOMER_C') then
             read(10, *) num_atoms(i)
         end if
-        write(*,*) 'on to the reading and writing portion ...'
-        write(*,*) ' for starters, numatoms i = ', num_atoms(i)
+        write(*,*) ' numatoms i = ', num_atoms(i)
         ! Read atomic coordinates, nuclear charges, and masses
         write(20, *) num_atoms(i)
         do j = 1, num_atoms(i)

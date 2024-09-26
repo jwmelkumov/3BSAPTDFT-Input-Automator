@@ -5,11 +5,10 @@
 # for running 3SAPTDFT. User need only prepare
 # ${NAME}A.dal, corr, ${NAME}P.data, and 
 # trimer.info file with the following 
-# scripts/programs present in the working 
-# directory:
+# programs present in the working directory:
 #
 # (1) gen_trimer_cnf, (2) gen_dimer_cnf, 
-# (3) gen_tempcoords, (4) add_coords_to_mol.sh
+# (3) gen_tempcoords
 #
 # Author: John W. Melkumov
 #================================================
@@ -85,6 +84,8 @@ else
 fi
 
 ###############################################
+# Prepare inputs ...
+###############################################
 
 # run gen_trimer_cnf (no arguments necessary)
 # with trimer.info present in working directory
@@ -108,17 +109,28 @@ $MAIN_SAPT_DIR/misc/daltutil/createinputs $NAME $TYPE $BASIS
 # this will generate trimer *.mol files
 $MAIN_SAPT_DIR/misc/daltutil/createtrimers $NAME 0 $BASIS
 
-# run add_coords_to_mol.sh with NAME argument
-# to add coordinates to all mol files (they are
+# add coordinates to all mol files (they are
 # all 0 after createtrimers)
-./add_coords_to_mol.sh $NAME
-
-# copy ${NAME}A.dal for the
-# monomers, dimers, and trimer
+mapfile -t coords < tempcoords
 for X in A B C AB BC AC ABC; do
-    cp "${NAME}A.dal" "${NAME}${X}.dal"
-done
+    j=-1
+    while IFS= read -r line; do
+        if [[ "$line" =~ ^[[:alnum:]]+[[:space:]]+0\.0000000000000[[:space:]]+0\.0000000000000[[:space:]]+0\.0000000000000$ ]]; then
+            echo "${coords[$((++j))]}"
+        else
+            echo "$line"
+        fi
+    done < "${NAME}${X}.mol" > "modified_${NAME}${X}.mol"
+done 
 
 for X in A B C AB BC AC ABC; do
     mv "modified_${NAME}${X}.mol" "${NAME}${X}.mol" 
 done 
+
+# copy ${NAME}A.dal for the
+# monomers, dimers, and trimer,
+# since the files should be identical
+for X in A B C AB BC AC ABC; do
+    cp "${NAME}A.dal" "${NAME}${X}.dal"
+done
+

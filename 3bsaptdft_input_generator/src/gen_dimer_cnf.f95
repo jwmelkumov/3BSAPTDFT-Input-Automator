@@ -1,11 +1,7 @@
 program gen_dimer_cnf
-! Program used to generate input to 3SAPTDFT
-! user must prepare trimer.info file with
-! and program will generate dimer.cnf file
 ! - John Melkumov 2/21/2024
     implicit none
-    character(len=100) :: monomer_label(3) = ['MONOMER_A', 'MONOMER_B', &
-                                              'MONOMER_C']
+    character(len=100) :: monomer_label(2) = ['MONOMER_A', 'MONOMER_B']
     integer, parameter :: maxsites = 10000
     character(len=100) :: line
     character(len=100) :: system_name
@@ -44,11 +40,7 @@ program gen_dimer_cnf
             write(*,*) num_atoms(i)
         else if (monomer_label(2) == 'MONOMER_B') then
             read(10, *) num_atoms(i)
-        else if (monomer_label(3) == 'MONOMER_C') then
-        !    read(10, *) num_atoms(i)
-            continue
         end if
-        !write(*,*) 'on to the reading and writing portion ...'
         write(*,*) ' numatoms i = ', num_atoms(i)
         ! Read atomic coordinates, nuclear charges, and masses
         write(30, *) num_atoms(i)
