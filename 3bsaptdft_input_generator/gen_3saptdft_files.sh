@@ -38,8 +38,17 @@ BASIS=$3
 # Check if necessary files present ...
 ###############################################
 
-# check if trimer.info file exists
-# if not throw error 'trimer.info file not found.'
+# check if ${NAME}A.dal file exists
+# if not throw error '${NAME}A.dal file not found.'
+if [ -f "${NAME}A.dal" ]; then
+    continue
+else
+    echo "${NAME}A.dal file not found."
+    exit
+fi
+
+# check if ${NAME}P.data file exists
+# if not throw error '${NAME}P.data file not found.'
 if [ -f "${NAME}P.data" ]; then
     continue
 else
@@ -94,7 +103,7 @@ fi
 
 # run gen_dimer_cnf (no arguments necessary)
 # with trimer.info present in working directory
-# this will generate trimer.cnf
+# this will generate dimer.cnf
 ./gen_dimer_cnf
 
 # run gen_tempcoords (no arguments necessary)
