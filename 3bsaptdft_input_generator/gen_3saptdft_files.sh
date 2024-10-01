@@ -41,7 +41,7 @@ BASIS=$3
 # check if ${NAME}A.dal file exists
 # if not throw error '${NAME}A.dal file not found.'
 if [ -f "${NAME}A.dal" ]; then
-    continue
+    echo "${NAME}A.dal file present."
 else
     echo "${NAME}A.dal file not found."
     exit
@@ -50,7 +50,7 @@ fi
 # check if ${NAME}P.data file exists
 # if not throw error '${NAME}P.data file not found.'
 if [ -f "${NAME}P.data" ]; then
-    continue
+    echo "${NAME}P.data file present."
 else
     echo "${NAME}P.data file not found."
     exit
@@ -59,7 +59,7 @@ fi
 # check if trimer.info file exists
 # if not throw error 'trimer.info file not found.'
 if [ -f "trimer.info" ]; then
-    continue
+    echo 'trimer.info file present.'
 else
     echo 'trimer.info file not found.'
     exit
@@ -68,7 +68,7 @@ fi
 # check if gen_trimer_cnf binary exists
 # if not throw error 'gen_trimer_cnf not found.'
 if [ -f "gen_trimer_cnf" ]; then
-    continue
+    echo 'gen_trimer_cnf binary present.'
 else
     echo 'gen_trimer_cnf binary not found.'
     exit
@@ -77,7 +77,7 @@ fi
 # check if gen_dimer_cnf binary exists
 # if not throw error 'gen_dimer_cnf not found.'
 if [ -f "gen_dimer_cnf" ]; then
-    continue
+    echo 'gen_dimer_cnf binary present.'
 else
     echo 'gen_dimer_cnf binary not found.'
     exit
@@ -86,7 +86,7 @@ fi
 # check if gen_tempcoords binary exists
 # if not throw error 'gen_tempcoords not found.'
 if [ -f "gen_tempcoords" ]; then
-    continue
+    echo 'gen_tempcoords binary present.'
 else
     echo 'gen_tempcoords binary not found.'
     exit
@@ -139,7 +139,7 @@ done
 # copy ${NAME}A.dal for the
 # monomers, dimers, and trimer,
 # since the files should be identical
-for X in A B C AB BC AC ABC; do
+for X in B C AB BC AC ABC; do
     cp "${NAME}A.dal" "${NAME}${X}.dal"
 done
 
